@@ -1,9 +1,16 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import ScrollAnimation from "../components/ScrollAnimation";
 import ImageModal from "../components/ImageModal";
 
 export default function Home() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
   return (
     <div className="min-h-screen bg-white">
       <ScrollAnimation />
@@ -17,29 +24,56 @@ export default function Home() {
               </div>
             </div>
             <div className="hidden lg:block">
-              <div className="ml-10 flex items-baseline space-x-4 xl:space-x-8">
-                <a href="#" className="text-gray-900 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors">Главная</a>
-                <a href="#about" className="text-gray-600 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors">О нас</a>
-                <a href="#research" className="text-gray-600 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors">Исследования</a>
-                <a href="#production" className="text-gray-600 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors">Производство</a>
-                <a href="#materials" className="text-gray-600 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors">Сырьевая база</a>
-                <a href="#freeze-dry" className="text-gray-600 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors">Институт лиофилизации</a>
-                <a href="#solutions" className="text-gray-600 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors">Решения</a>
-                <a href="#news" className="text-gray-600 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors">Новости</a>
-                <a href="#contact" className="text-gray-600 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors">Контакты</a>
-                <a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-800 to-teal-600 text-white hover:from-blue-900 hover:to-teal-700 px-3 xl:px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105">Магазин</a>
+              <div className="ml-10 flex flex-wrap items-center gap-x-2 xl:gap-x-4 gap-y-2">
+                <a href="#" className="text-gray-900 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Главная</a>
+                <a href="#about" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">О нас</a>
+                <a href="#research" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Исследования</a>
+                <a href="#production" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Производство</a>
+                <a href="#materials" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Сырьевая база</a>
+                <a href="#freeze-dry" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Институт лиофилизации</a>
+                <a href="#solutions" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Решения</a>
+                <a href="#news" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Новости</a>
+                <a href="#contact" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Контакты</a>
+                <a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-800 to-teal-600 text-white hover:from-blue-900 hover:to-teal-700 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105 whitespace-nowrap">Магазин</a>
               </div>
             </div>
             {/* 移动端菜单按钮 */}
             <div className="lg:hidden">
-              <button className="text-gray-600 hover:text-blue-800 p-2">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <button 
+                onClick={toggleMobileMenu}
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                aria-expanded={isMobileMenuOpen}
+                aria-label="Toggle navigation menu"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  {isMobileMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
                 </svg>
               </button>
             </div>
           </div>
         </div>
+
+        {/* 移动端菜单 */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
+              <a href="#" className="text-gray-900 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Главная</a>
+              <a href="#about" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">О нас</a>
+              <a href="#research" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Исследования</a>
+              <a href="#production" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Производство</a>
+              <a href="#materials" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Сырьевая база</a>
+              <a href="#freeze-dry" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Институт лиофилизации</a>
+              <a href="#solutions" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Решения</a>
+              <a href="#news" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Новости</a>
+              <a href="#contact" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Контакты</a>
+              <a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-800 to-teal-600 text-white hover:from-blue-900 hover:to-teal-700 block px-3 py-2 text-base font-medium rounded-lg transition-all duration-300 mx-3 mt-2">Магазин</a>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
@@ -686,36 +720,33 @@ export default function Home() {
       </footer>
 
       {/* 移动端底部固定操作条 */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden z-40">
-        {/* 移动端底部固定操作条 */}
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-50 lg:hidden">
-          <div className="flex space-x-3">
-            <button className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center space-x-2 hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-              </svg>
-              <span>Быстрый звонок</span>
-            </button>
-            
-            <button className="flex-1 bg-gradient-to-r from-teal-600 to-teal-700 text-white py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center space-x-2 hover:from-teal-700 hover:to-teal-800 transition-all duration-300 shadow-lg">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd"/>
-              </svg>
-              <span>Консультация WeChat</span>
-            </button>
-            
-            <a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="flex-1 border-2 border-gray-300 text-gray-700 py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center space-x-2 hover:border-gray-400 hover:bg-gray-50 transition-all duration-300">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 2L3 7v11a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V7l-7-5zM6 12a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1z" clipRule="evenodd"/>
-              </svg>
-              <span>Магазин</span>
-            </a>
-          </div>
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-50 lg:hidden">
+        <div className="flex space-x-3">
+          <button className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center space-x-2 hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+            </svg>
+            <span>Быстрый звонок</span>
+          </button>
+          
+          <button className="flex-1 bg-gradient-to-r from-teal-600 to-teal-700 text-white py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center space-x-2 hover:from-teal-700 hover:to-teal-800 transition-all duration-300 shadow-lg">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd"/>
+            </svg>
+            <span>Консультация WeChat</span>
+          </button>
+          
+          <a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="flex-1 border-2 border-gray-300 text-gray-700 py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center space-x-2 hover:border-gray-400 hover:bg-gray-50 transition-all duration-300">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 2L3 7v11a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V7l-7-5zM6 12a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1z" clipRule="evenodd"/>
+            </svg>
+            <span>Магазин</span>
+          </a>
         </div>
-
-        {/* 为移动端底部操作条预留空间 */}
-        <div className="h-20 lg:hidden"></div>
       </div>
+
+      {/* 为移动端底部操作条预留空间 */}
+      <div className="h-20 lg:hidden"></div>
     </div>
   );
 }
