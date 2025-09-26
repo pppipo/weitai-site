@@ -27,6 +27,7 @@ export default function Home() {
                 <a href="#solutions" className="text-gray-600 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors">Решения</a>
                 <a href="#news" className="text-gray-600 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors">Новости</a>
                 <a href="#contact" className="text-gray-600 hover:text-blue-800 px-2 xl:px-3 py-2 text-sm font-medium transition-colors">Контакты</a>
+                <a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-800 to-teal-600 text-white hover:from-blue-900 hover:to-teal-700 px-3 xl:px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105">Магазин</a>
               </div>
             </div>
             {/* 移动端菜单按钮 */}
@@ -654,6 +655,7 @@ export default function Home() {
                 <li><a href="#production" className="text-gray-300 hover:text-white transition-colors">Производство</a></li>
                 <li><a href="#solutions" className="text-gray-300 hover:text-white transition-colors">Решения</a></li>
                 <li><a href="#news" className="text-gray-300 hover:text-white transition-colors">Новости</a></li>
+                <li><a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">Магазин</a></li>
               </ul>
             </div>
 
@@ -702,12 +704,12 @@ export default function Home() {
               <span>Консультация WeChat</span>
             </button>
             
-            <button className="flex-1 border-2 border-gray-300 text-gray-700 py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center space-x-2 hover:border-gray-400 hover:bg-gray-50 transition-all duration-300">
+            <a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="flex-1 border-2 border-gray-300 text-gray-700 py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center space-x-2 hover:border-gray-400 hover:bg-gray-50 transition-all duration-300">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V7zM5 9a1 1 0 000 2h6a1 1 0 100-2H5z" clipRule="evenodd"/>
+                <path fillRule="evenodd" d="M10 2L3 7v11a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V7l-7-5zM6 12a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1z" clipRule="evenodd"/>
               </svg>
-              <span>Техническая документация</span>
-            </button>
+              <span>Магазин</span>
+            </a>
           </div>
         </div>
 
