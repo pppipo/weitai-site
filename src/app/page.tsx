@@ -353,9 +353,6 @@ export default function Home() {
                   <span className="text-gray-600">Антиоксидант, отбеливание</span>
                 </div>
               </div>
-              <a href="#" className="text-green-600 font-medium hover:text-green-700 transition-colors">
-                Подробнее →
-              </a>
             </div>
 
             {/* 九节茶 */}
@@ -376,9 +373,6 @@ export default function Home() {
                   <span className="text-gray-600">Противовоспалительный, восстанавливающий</span>
                 </div>
               </div>
-              <a href="#" className="text-blue-600 font-medium hover:text-blue-700 transition-colors">
-                Подробнее →
-              </a>
             </div>
 
             {/* 长白山人参 */}
@@ -399,9 +393,6 @@ export default function Home() {
                   <span className="text-gray-600">Антивозрастной, подтягивающий</span>
                 </div>
               </div>
-              <a href="#" className="text-red-600 font-medium hover:text-red-700 transition-colors">
-                Подробнее →
-              </a>
             </div>
           </div>
         </div>
