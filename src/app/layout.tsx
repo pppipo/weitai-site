@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "微肽生物 - 专业生物科技公司",
-  description: "微肽生物致力于生物科技研发与生产，提供专业的生物技术解决方案",
+  title: "Микропептид Био - Профессиональная биотехнологическая компания",
+  description: "Микропептид Био занимается исследованиями и производством в области биотехнологий, предоставляя профессиональные решения в области биотехнологий",
 };
 
 export default function RootLayout({
@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh-CN">
+    <html lang="ru">
       <body className="antialiased">
         {children}
       </body>
