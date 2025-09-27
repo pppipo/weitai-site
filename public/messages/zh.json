@@ -1,0 +1,299 @@
+{
+  "nav": {
+    "brand": "微肽集团",
+    "home": "首页",
+    "about": "关于我们",
+    "team": "管理团队",
+    "research": "科研实力",
+    "products": "品牌产品",
+    "news": "新闻动态",
+    "investment": "招商加盟",
+    "careers": "加入我们",
+    "contact": "联系我们",
+    "solutions": "解决方案",
+    "shop": "商城",
+    "production": "规模化生产",
+    "materials": "原料基地",
+    "freezeDry": "冻干研究院"
+  },
+  "hero": {
+    "title1": "功能性护肤",
+    "title2": "超级工厂",
+    "subtitle": "闭环生产周期和研发基于生物技术",
+    "description": "创造国际功能性化妆品品牌功能性化妆品"
+  },
+  "stats": {
+    "bases": {
+      "number": "2",
+      "label": "生产基地"
+    },
+    "institutes": {
+      "number": "3",
+      "label": "研究院所"
+    },
+    "lines": {
+      "number": "5",
+      "label": "生产线"
+    },
+    "level": {
+      "number": "10",
+      "label": "万级"
+    },
+    "gmpc": {
+      "number": "10万级",
+      "label": "洁净车间"
+    }
+  },
+  "solutions": {
+    "subtitle": "专业解决方案",
+    "oem": {
+      "title": "OEM代工服务",
+      "description": "提供从配方研发到生产包装的一站式代工服务，满足不同品牌的个性化需求"
+    },
+    "medical": {
+      "title": "医美级护肤",
+      "description": "基于皮肤学研究的医美级护肤产品，安全有效，适合敏感肌肤使用"
+    },
+    "freeze": {
+      "title": "冻干技术",
+      "description": "先进的冻干保鲜技术，最大程度保持生物活性成分的稳定性和功效"
+    },
+    "functional": {
+      "title": "功效护肤赛道",
+      "description": "深度专精各功效赛道：美白、抗衰、防脱、修护等多个领域"
+    }
+  },
+  "about": {
+    "title": "关于微肽集团",
+    "subtitle": "科技赋能美学，打造国际化功能性护肤品牌",
+    "description": "微肽集团依托生物科技与皮肤学研究，聚焦高活性、高稳定性的生物活性成分研发，致力于打造具有国际竞争力的功能性护肤品牌。集团采用科研驱动、产业协同、标准化落地的发展模式，构建从基础研究到产业化应用的完整生态链。"
+  },
+  "team": {
+    "title": "管理团队",
+    "subtitle": "汇聚行业精英，引领科技创新",
+    "chairman": "董事长",
+    "founder": "创始人",
+    "shareholder": "股东"
+  },
+  "research": {
+    "title": "科研实力",
+    "subtitle": "深度合作知名高校，构建强大研发体系与技术平台",
+    "labs": {
+      "title": "联合实验室",
+      "southern": {
+        "name": "南方医科大学",
+        "description": "专注透皮技术、纳米包埋、天然成分开发；拥有56项专利，合作伙伴包括华润999、丹姿、霸王、HBN等"
+      },
+      "anhui": {
+        "name": "安徽医科大学",
+        "description": "联合重点实验室，开发高活性、高稳定性生物活性成分（如重组III型胶原蛋白、金属硫蛋白），替代传统动物提取物"
+      },
+      "sanya": {
+        "name": "三亚专家团队",
+        "description": "自2022年联合研究，专注医美行业高质量发展，提供个性化护肤解决方案，注重临床试验与行业发展"
+      }
+    },
+    "platforms": {
+      "title": "核心技术平台",
+      "freeze": {
+        "icon": "冻",
+        "name": "冻干稳定",
+        "description": "活性保持技术"
+      },
+      "nano": {
+        "icon": "纳",
+        "name": "纳米载体",
+        "description": "微球包埋技术"
+      },
+      "bio": {
+        "icon": "仿",
+        "name": "仿生防护",
+        "description": "理化复配"
+      },
+      "micro": {
+        "icon": "微",
+        "name": "微乳化",
+        "description": "超细分散技术"
+      },
+      "trans": {
+        "icon": "透",
+        "name": "透皮吸收",
+        "description": "载体渗透技术"
+      }
+    }
+  },
+  "products": {
+    "title": "品牌产品",
+    "subtitle": "科技成果转化，打造高端功能性护肤产品线",
+    "product1": "生物活性肽精华",
+    "product2": "冻干面膜系列",
+    "product3": "功能性护肤套装",
+    "product4": "定制化护肤方案"
+  },
+  "news": {
+    "title": "新闻动态",
+    "subtitle": "关注行业前沿，分享企业发展动态"
+  },
+  "investment": {
+    "title": "招商加盟",
+    "subtitle": "携手共创美好未来，开启合作新篇章",
+    "advantages": {
+      "title": "合作优势",
+      "research": "强大研发实力",
+      "production": "规模化生产",
+      "quality": "严格质量控制",
+      "support": "全方位支持"
+    },
+    "process": {
+      "title": "合作流程",
+      "contact": "初步接洽",
+      "visit": "实地考察",
+      "negotiate": "商务洽谈",
+      "sign": "签约合作"
+    }
+  },
+  "careers": {
+    "title": "加入我们",
+    "subtitle": "寻找志同道合的伙伴，共同创造美好未来"
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "期待与您的合作交流",
+    "address": "地址",
+    "phone": "电话",
+    "email": "邮箱",
+    "wechat": "微信",
+    "wechatConsultation": "微信咨询",
+    "quickCall": "一键拨号"
+  },
+  "production": {
+    "title": "生产实力",
+    "subtitle": "十万级GMPC洁净车间，全自动化生产线，保障产品质量与供应能力",
+    "capacity": {
+      "title": "生产能力",
+      "daily": "日产能",
+      "dailyNumber": "100万+",
+      "lines": "生产线数量",
+      "linesNumber": "50+条",
+      "quality": "质量控制工序",
+      "qualityNumber": "36道"
+    },
+    "certifications": {
+      "title": "认证资质",
+      "gmpc": "十万级洁净车间",
+      "iso": "质量管理体系",
+      "fda": "美国FDA认证",
+      "automation": "自动化",
+      "automationDesc": "智能化生产系统"
+    }
+  },
+  "materials": {
+    "title": "原料基地",
+    "subtitle": "三大核心原料基地，从源头保障产品品质与功效",
+    "location": "产地",
+    "component": "成分",
+    "effect": "功效",
+    "buer": {
+      "name": "不二莓茶",
+      "location": "湖南张家界",
+      "component": "二氢杨梅素",
+      "effect": "抗氧化、美白"
+    },
+    "jiujie": {
+      "name": "九节茶",
+      "location": "广西大山",
+      "component": "多酚类化合物",
+      "effect": "抗炎、修复"
+    },
+    "ginseng": {
+      "name": "长白山人参",
+      "location": "吉林长白山",
+      "component": "人参皂苷",
+      "effect": "抗衰、紧致"
+    }
+  },
+  "freezeDry": {
+    "title": "冻干研究院",
+    "subtitle": "专业冻干技术研发，多样化剂型满足不同产品需求",
+    "forms": {
+      "title": "冻干剂型矩阵",
+      "powder": "冻干粉",
+      "tablets": "冻干片",
+      "mask": "冻干面膜",
+      "beads": "冻干珠",
+      "granules": "冻干颗粒",
+      "lotion": "冻干乳",
+      "serum": "冻干精华"
+    },
+    "process": {
+      "title": "开发流程",
+      "step1": {
+        "title": "配方开发",
+        "desc": "配方设计与优化"
+      },
+      "step2": {
+        "title": "中试生产",
+        "desc": "小批量生产验证"
+      },
+      "step3": {
+        "title": "验证测试",
+        "desc": "稳定性与安全性测试"
+      },
+      "step4": {
+        "title": "规模化",
+        "desc": "大规模生产与供应"
+      }
+    }
+  },
+  "qualifications": {
+    "title": "资质荣誉",
+    "subtitle": "权威认证与行业奖项，彰显企业实力与品质保障",
+    "certificate": "企业资质证书",
+    "highTech": "高新技术企业",
+    "specialized": "专精特新",
+    "gmpc": "GMPC认证",
+    "iso": "ISO认证",
+    "fda": "FDA认证"
+  },
+  "news": {
+    "title": "新闻中心",
+    "subtitle": "关注行业动态，分享科研成果与合作进展",
+    "card1": {
+      "alt": "微肽生物与南方医科大学战略合作",
+      "title": "微肽生物与南方医科大学签署战略合作协议",
+      "description": "双方将在皮肤学研究、功效验证等领域开展深度合作，共同推进产学研一体化发展。"
+    },
+    "card2": {
+      "alt": "10万级GMPC新车间正式投产",
+      "title": "10万级GMPC新车间正式投产",
+      "description": "全新自动化生产线正式投产，日产能提升至100万+，进一步提升供应能力。"
+    },
+    "card3": {
+      "alt": "与安徽医科大学共建合成生物蛋白重点实验室",
+      "title": "与安徽医科大学共建合成生物蛋白重点实验室",
+      "description": "安徽省合成生物蛋白重点实验室：生物学+药理学+皮肤学组合，形成问题肌肤解决方案。"
+    }
+  },
+  "footer": {
+    "companyName": "微肽生物",
+    "description": "生物科技公司，专注于东方美学与现代技术的融合，致力于打造功能性护肤品超级工厂。",
+    "phone": "0079298331259",
+    "addresses": {
+      "guangzhou": "微肽广州工厂：广州市白云区白云湖街道大岚村15社77号",
+      "guangdong": "微肽广东工厂：佛山市南海区狮山镇松夏工业园桃园东路18号",
+      "hunan": "微肽湖南工厂：长沙宁乡经济开发区西园北路蓝月谷智能产业园11栋",
+      "marketing": "营销中心：广州市白云区广云路408号白云美湾检测大厦801室"
+    },
+    "quickLinks": {
+      "title": "快速链接",
+      "about": "关于我们",
+      "research": "科研实力",
+      "production": "生产实力",
+      "solutions": "解决方案",
+      "news": "新闻动态",
+      "shop": "商城"
+    },
+    "copyright": "版权所有 © 2024 微肽集团",
+    "registration": "备案号：皖ICP备2024000000号"
+  }
+}

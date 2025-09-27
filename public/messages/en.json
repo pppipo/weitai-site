@@ -1,0 +1,299 @@
+{
+  "nav": {
+    "brand": "Micropeptide Group",
+    "home": "Home",
+    "about": "About Us",
+    "team": "Leadership",
+    "research": "R&D Excellence",
+    "products": "Product Portfolio",
+    "news": "News & Insights",
+    "investment": "Partnership",
+    "careers": "Careers",
+    "contact": "Contact",
+    "solutions": "Solutions",
+    "shop": "Shop",
+    "production": "Manufacturing",
+    "materials": "Raw Materials",
+    "freezeDry": "Freeze-Dry R&D"
+  },
+  "hero": {
+    "title1": "Advanced Bioactive",
+    "title2": "Skincare Innovation",
+    "subtitle": "Biotechnology-driven R&D and integrated manufacturing excellence",
+    "description": "Pioneering next-generation functional cosmetics with scientific precision"
+  },
+  "stats": {
+    "bases": {
+      "number": "2",
+      "label": "Manufacturing Facilities"
+    },
+    "institutes": {
+      "number": "3",
+      "label": "Research Institutes"
+    },
+    "lines": {
+      "number": "5",
+      "label": "Production Lines"
+    },
+    "level": {
+      "number": "10",
+      "label": "Class 10,000 Cleanroom"
+    },
+    "gmpc": {
+      "number": "Class 100K",
+      "label": "GMPC Cleanroom"
+    }
+  },
+  "solutions": {
+    "subtitle": "Comprehensive Solutions",
+    "oem": {
+      "title": "Contract Manufacturing",
+      "description": "End-to-end OEM services from formulation development to production and packaging, tailored to diverse brand requirements"
+    },
+    "medical": {
+      "title": "Dermatological Skincare",
+      "description": "Clinically-validated skincare solutions based on dermatological research, ensuring safety and efficacy for sensitive skin conditions"
+    },
+    "freeze": {
+      "title": "Freeze-Drying Technology",
+      "description": "Advanced lyophilization technology preserving bioactive ingredient stability and maximizing therapeutic efficacy"
+    },
+    "functional": {
+      "title": "Functional Skincare Solutions",
+      "description": "Specialized efficacy platforms: brightening, anti-aging, hair restoration, and skin barrier repair technologies"
+    }
+  },
+  "about": {
+    "title": "About Micropeptide Group",
+    "subtitle": "Science-driven innovation, creating next-generation functional skincare brands",
+    "description": "Micropeptide Group leverages biotechnology and dermatological research to develop highly active, stable bioactive ingredients for internationally competitive functional skincare brands. Our integrated approach combines research excellence, industrial collaboration, and standardized implementation across the complete value chain from basic research to commercial application."
+  },
+  "team": {
+    "title": "Leadership Team",
+    "subtitle": "Industry experts driving technological innovation and strategic growth",
+    "chairman": "Chairman",
+    "founder": "Founder & CEO",
+    "shareholder": "Strategic Partner"
+  },
+  "research": {
+    "title": "R&D Excellence",
+    "subtitle": "Strategic partnerships with leading universities, establishing comprehensive R&D infrastructure and technology platforms",
+    "labs": {
+      "title": "Collaborative Research Centers",
+      "southern": {
+        "name": "Southern Medical University",
+        "description": "Specialized in transdermal delivery, nano-encapsulation, and natural ingredient development; 56+ patents with partnerships including CR999, Danzi, Bawang, and HBN"
+      },
+      "anhui": {
+        "name": "Anhui Medical University",
+        "description": "Joint key laboratory developing highly active, stable bioactive ingredients (recombinant collagen type III, metallothionein), replacing traditional animal-derived extracts"
+      },
+      "sanya": {
+        "name": "Sanya Research Consortium",
+        "description": "Collaborative research since 2022 focusing on medical aesthetics industry advancement, delivering personalized skincare solutions with emphasis on clinical validation and industry development"
+      }
+    },
+    "platforms": {
+      "title": "Core Technology Platforms",
+      "freeze": {
+        "icon": "F",
+        "name": "Freeze-Drying Stabilization",
+        "description": "Bioactivity preservation technology"
+      },
+      "nano": {
+        "icon": "N",
+        "name": "Nano-Carrier Systems",
+        "description": "Microsphere encapsulation technology"
+      },
+      "bio": {
+        "icon": "B",
+        "name": "Biomimetic Protection",
+        "description": "Physicochemical composition optimization"
+      },
+      "micro": {
+        "icon": "M",
+        "name": "Microemulsification",
+        "description": "Ultra-fine dispersion technology"
+      },
+      "trans": {
+        "icon": "T",
+        "name": "Transdermal Delivery",
+        "description": "Advanced penetration enhancement"
+      }
+    }
+  },
+  "products": {
+    "title": "Product Portfolio",
+    "subtitle": "Technology-to-market transformation, creating premium functional skincare product lines",
+    "product1": "Bioactive Peptide Concentrates",
+    "product2": "Freeze-Dried Mask Collection",
+    "product3": "Functional Skincare Systems",
+    "product4": "Bespoke Skincare Solutions"
+  },
+  "news": {
+    "title": "News & Insights",
+    "subtitle": "Industry leadership and innovation updates"
+  },
+  "investment": {
+    "title": "Strategic Partnership",
+    "subtitle": "Collaborative excellence, shaping the future of functional skincare",
+    "advantages": {
+      "title": "Partnership Advantages",
+      "research": "Advanced R&D capabilities",
+      "production": "Scalable manufacturing",
+      "quality": "Rigorous quality assurance",
+      "support": "Comprehensive partnership support"
+    },
+    "process": {
+      "title": "Partnership Process",
+      "contact": "Initial consultation",
+      "visit": "Facility tour",
+      "negotiate": "Strategic alignment",
+      "sign": "Partnership agreement"
+    }
+  },
+  "careers": {
+    "title": "Join Our Team",
+    "subtitle": "Seeking visionary professionals to advance the future of skincare science"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Looking forward to cooperation and communication with you",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "wechat": "WeChat",
+    "wechatConsultation": "WeChat Consultation",
+    "quickCall": "Quick Call"
+  },
+  "production": {
+    "title": "Manufacturing Excellence",
+    "subtitle": "Class 100,000 GMPC-certified cleanrooms with fully automated production lines, ensuring superior quality and supply reliability",
+    "capacity": {
+      "title": "Production Capabilities",
+      "daily": "Daily Capacity",
+      "dailyNumber": "1M+ Units",
+      "lines": "Production Lines",
+      "linesNumber": "50+ Lines",
+      "quality": "Quality Control Points",
+      "qualityNumber": "36 Checkpoints"
+    },
+    "certifications": {
+      "title": "Certifications & Standards",
+      "gmpc": "Class 100,000 Cleanrooms",
+      "iso": "ISO Quality Management",
+      "fda": "US FDA Compliance",
+      "automation": "Smart Manufacturing",
+      "automationDesc": "Intelligent Production Systems"
+    }
+  },
+  "materials": {
+    "title": "Premium Raw Material Sources",
+    "subtitle": "Three specialized sourcing bases ensuring superior ingredient quality and efficacy from origin",
+    "location": "Source Region",
+    "component": "Active Compound",
+    "effect": "Therapeutic Benefit",
+    "buer": {
+      "name": "Buer Berry Tea Extract",
+      "location": "Zhangjiajie, Hunan Province",
+      "component": "Dihydromyricetin",
+      "effect": "Antioxidant & Brightening"
+    },
+    "jiujie": {
+      "name": "Jiujie Tea Extract",
+      "location": "Dashan, Guangxi Province",
+      "component": "Polyphenolic Compounds",
+      "effect": "Anti-inflammatory & Repair"
+    },
+    "ginseng": {
+      "name": "Changbai Mountain Ginseng",
+      "location": "Changbai Mountains, Jilin Province",
+      "component": "Ginsenosides",
+      "effect": "Anti-aging & Firming"
+    }
+  },
+  "freezeDry": {
+    "title": "Freeze-Drying Innovation Center",
+    "subtitle": "Advanced lyophilization technology development with diverse formulation matrices for comprehensive product applications",
+    "forms": {
+      "title": "Freeze-Dried Formulation Matrix",
+      "powder": "Lyophilized Powder",
+      "tablets": "Freeze-Dried Tablets",
+      "mask": "Freeze-Dried Masks",
+      "beads": "Freeze-Dried Microspheres",
+      "granules": "Freeze-Dried Granules",
+      "lotion": "Freeze-Dried Emulsions",
+      "serum": "Freeze-Dried Serums"
+    },
+    "process": {
+      "title": "Development Pipeline",
+      "step1": {
+        "title": "Formulation Design",
+        "desc": "Advanced formula development & optimization"
+      },
+      "step2": {
+        "title": "Pilot Scale Production",
+        "desc": "Small-batch validation & process refinement"
+      },
+      "step3": {
+        "title": "Validation Studies",
+        "desc": "Comprehensive stability & safety assessment"
+      },
+      "step4": {
+        "title": "Commercial Scale-Up",
+        "desc": "Full-scale manufacturing & supply chain"
+      }
+    }
+  },
+  "qualifications": {
+    "title": "Certifications & Recognition",
+    "subtitle": "Industry-leading certifications and prestigious awards demonstrating our commitment to excellence and quality assurance",
+    "certificate": "Corporate Certification Portfolio",
+    "highTech": "National High-Tech Enterprise",
+    "specialized": "Specialized & Innovative SME",
+    "gmpc": "GMPC Certification",
+    "iso": "ISO Quality Standards",
+    "fda": "FDA Regulatory Compliance"
+  },
+  "news": {
+    "title": "News Center",
+    "subtitle": "Industry insights, research breakthroughs, and strategic partnership developments",
+    "card1": {
+      "alt": "Micropeptide Bio Strategic Partnership with Southern Medical University",
+      "title": "Micropeptide Bio Establishes Strategic Research Alliance with Southern Medical University",
+      "description": "Comprehensive collaboration in dermatological research and efficacy validation, advancing integrated industry-academia-research development initiatives."
+    },
+    "card2": {
+      "alt": "New Class 100,000 GMPC Manufacturing Facility Operational",
+      "title": "State-of-the-Art Class 100,000 GMPC Manufacturing Facility Now Operational",
+      "description": "Advanced automated production lines achieve full operational capacity with 1M+ daily production capability, significantly enhancing supply chain reliability."
+    },
+    "card3": {
+      "alt": "Joint Synthetic Bioprotein Research Laboratory with Anhui Medical University",
+      "title": "Collaborative Synthetic Bioprotein Research Laboratory Established with Anhui Medical University",
+      "description": "Anhui Province Synthetic Bioprotein Key Laboratory: Integrating biology, pharmacology, and dermatology to develop comprehensive solutions for problematic skin conditions."
+    }
+  },
+  "footer": {
+    "companyName": "Micropeptide Bio",
+    "description": "A biotechnology company specializing in the fusion of Eastern aesthetics and modern technology, committed to creating a functional skincare superfactory.",
+    "phone": "0079298331259",
+    "addresses": {
+      "guangzhou": "Micropeptide Guangzhou Facility: No. 77, 15th Community, Dalan Village, Baiyunhu Street, Baiyun District, Guangzhou",
+      "guangdong": "Micropeptide Guangdong Facility: No. 18, Taoyuan East Road, Songxia Industrial Park, Shishan Town, Nanhai District, Foshan",
+      "hunan": "Micropeptide Hunan Facility: Building 11, Lanyuegu Intelligent Industrial Park, Xiyuan North Road, Ningxiang Economic Development Zone, Changsha",
+      "marketing": "Marketing Center: Room 801, Baiyun Meiwan Testing Building, No. 408, Guangyun Road, Baiyun District, Guangzhou"
+    },
+    "quickLinks": {
+      "title": "Quick Links",
+      "about": "About Us",
+      "research": "R&D Excellence",
+      "production": "Manufacturing Excellence",
+      "solutions": "Solutions",
+      "news": "News & Insights",
+      "shop": "Store"
+    },
+    "copyright": "Copyright © 2024 Micropeptide Group",
+    "registration": "Registration No.: 皖ICP备2024000000号"
+  }
+}

@@ -1,16 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import ScrollAnimation from "../components/ScrollAnimation";
 import ImageModal from "../components/ImageModal";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { useTranslation } from "../hooks/useTranslation";
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  // 处理点击外部区域关闭菜单
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isMobileMenuOpen && mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        closeMobileMenu();
+      }
+    };
+
+    if (isMobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMobileMenuOpen]);
   return (
     <div className="min-h-screen bg-white">
       <ScrollAnimation />
@@ -20,25 +45,31 @@ export default function Home() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <div className="text-2xl font-bold bg-gradient-to-r from-blue-800 to-teal-600 bg-clip-text text-transparent">
-                Микропептид Биотех
+                {t('nav.brand')}
               </div>
             </div>
             <div className="hidden lg:block">
               <div className="ml-10 flex flex-wrap items-center gap-x-2 xl:gap-x-4 gap-y-2">
-                <a href="#" className="text-gray-900 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Главная</a>
-                <a href="#about" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">О нас</a>
-                <a href="#research" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Исследования</a>
-                <a href="#production" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Производство</a>
-                <a href="#materials" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Сырьевая база</a>
-                <a href="#freeze-dry" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Институт лиофилизации</a>
-                <a href="#solutions" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Решения</a>
-                <a href="#news" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Новости</a>
-                <a href="#contact" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">Контакты</a>
-                <a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-800 to-teal-600 text-white hover:from-blue-900 hover:to-teal-700 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105 whitespace-nowrap">Магазин</a>
+                <a href="#" className="text-gray-900 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">{t('nav.home')}</a>
+                <a href="#about" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">{t('nav.about')}</a>
+                <a href="#research" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">{t('nav.research')}</a>
+                <a href="#production" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">{t('nav.production')}</a>
+                <a href="#materials" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">{t('nav.materials')}</a>
+                <a href="#freeze-dry" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">{t('nav.freezeDry')}</a>
+                <a href="#solutions" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">{t('nav.solutions')}</a>
+                <a href="#news" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">{t('nav.news')}</a>
+                <a href="#contact" className="text-gray-600 hover:text-blue-800 px-2 py-2 text-sm font-medium transition-colors whitespace-nowrap">{t('nav.contact')}</a>
+                <a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-800 to-teal-600 text-white hover:from-blue-900 hover:to-teal-700 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105 whitespace-nowrap">{t('nav.shop')}</a>
               </div>
             </div>
-            {/* 移动端菜单按钮 */}
-            <div className="lg:hidden">
+            
+            {/* 语言选择器 - 桌面版右上角 */}
+            <div className="hidden lg:flex items-center ml-4">
+              <LanguageSwitcher />
+            </div>
+            {/* 移动端语言选择器和菜单按钮 */}
+            <div className="lg:hidden flex items-center space-x-2">
+              <LanguageSwitcher />
               <button 
                 onClick={toggleMobileMenu}
                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
@@ -59,18 +90,18 @@ export default function Home() {
 
         {/* 移动端菜单 */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden">
+          <div className="lg:hidden" ref={mobileMenuRef}>
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
-              <a href="#" className="text-gray-900 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Главная</a>
-              <a href="#about" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">О нас</a>
-              <a href="#research" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Исследования</a>
-              <a href="#production" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Производство</a>
-              <a href="#materials" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Сырьевая база</a>
-              <a href="#freeze-dry" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Институт лиофилизации</a>
-              <a href="#solutions" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Решения</a>
-              <a href="#news" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Новости</a>
-              <a href="#contact" className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">Контакты</a>
-              <a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-blue-800 to-teal-600 text-white hover:from-blue-900 hover:to-teal-700 block px-3 py-2 text-base font-medium rounded-lg transition-all duration-300 mx-3 mt-2">Магазин</a>
+              <a href="#" onClick={closeMobileMenu} className="text-gray-900 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">{t('nav.home')}</a>
+              <a href="#about" onClick={closeMobileMenu} className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">{t('nav.about')}</a>
+              <a href="#research" onClick={closeMobileMenu} className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">{t('nav.research')}</a>
+              <a href="#production" onClick={closeMobileMenu} className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">{t('nav.production')}</a>
+              <a href="#materials" onClick={closeMobileMenu} className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">{t('nav.materials')}</a>
+              <a href="#freeze-dry" onClick={closeMobileMenu} className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">{t('nav.freezeDry')}</a>
+              <a href="#solutions" onClick={closeMobileMenu} className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">{t('nav.solutions')}</a>
+              <a href="#news" onClick={closeMobileMenu} className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">{t('nav.news')}</a>
+              <a href="#contact" onClick={closeMobileMenu} className="text-gray-600 hover:text-blue-800 block px-3 py-2 text-base font-medium transition-colors">{t('nav.contact')}</a>
+              <a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="bg-gradient-to-r from-blue-800 to-teal-600 text-white hover:from-blue-900 hover:to-teal-700 block px-3 py-2 text-base font-medium rounded-lg transition-all duration-300 mx-3 mt-2">{t('nav.shop')}</a>
             </div>
           </div>
         )}
@@ -100,16 +131,16 @@ export default function Home() {
           <div className="animate-fade-in-up">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
               <span className="bg-gradient-to-r from-white via-blue-100 to-teal-100 bg-clip-text text-transparent">
-                Функциональный уход за кожей
+                {t('hero.title1')}
               </span>
               <br />
               <span className="bg-gradient-to-r from-blue-400 via-teal-400 to-blue-300 bg-clip-text text-transparent">
-                Супер фабрика
+                {t('hero.title2')}
               </span>
             </h1>
             
             <p className="text-lg sm:text-xl md:text-2xl text-blue-100 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4">
-              Замкнутый цикл производства и исследований на основе биотехнологий · Создание международного бренда функциональной косметики
+              {t('hero.subtitle')}
             </p>
 
             
@@ -117,20 +148,20 @@ export default function Home() {
             {/* 数字徽章 - 移动端优化 */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto px-4">
               <div className="group bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 transform hover:scale-105">
-                <div className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2 group-hover:text-blue-300 transition-colors">3</div>
-                <div className="text-blue-100 text-xs sm:text-sm">Крупных производственных баз</div>
+                <div className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2 group-hover:text-blue-300 transition-colors">{t('stats.bases.number')}</div>
+                <div className="text-blue-100 text-xs sm:text-sm">{t('stats.bases.label')}</div>
               </div>
               <div className="group bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 transform hover:scale-105">
-                <div className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2 group-hover:text-teal-300 transition-colors">10</div>
-                <div className="text-blue-100 text-xs sm:text-sm">Исследовательских институтов</div>
+                <div className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2 group-hover:text-teal-300 transition-colors">{t('stats.institutes.number')}</div>
+                <div className="text-blue-100 text-xs sm:text-sm">{t('stats.institutes.label')}</div>
               </div>
               <div className="group bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 transform hover:scale-105">
-                <div className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2 group-hover:text-blue-300 transition-colors">50+</div>
-                <div className="text-blue-100 text-xs sm:text-sm">Производственных линий</div>
+                <div className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2 group-hover:text-blue-300 transition-colors">{t('stats.lines.number')}</div>
+                <div className="text-blue-100 text-xs sm:text-sm">{t('stats.lines.label')}</div>
               </div>
               <div className="group bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 transform hover:scale-105">
-                <div className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2 group-hover:text-teal-300 transition-colors">100 000 уровень</div>
-                <div className="text-blue-100 text-xs sm:text-sm">GMPC цехов</div>
+                <div className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2 group-hover:text-teal-300 transition-colors">{t('stats.gmpc.number')}</div>
+                <div className="text-blue-100 text-xs sm:text-sm">{t('stats.gmpc.label')}</div>
               </div>
             </div>
           </div>
@@ -148,9 +179,9 @@ export default function Home() {
       <section id="solutions" className="py-16 sm:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16 scroll-reveal">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Решения</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{t('nav.solutions')}</h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Четыре основных бизнес-направления, предоставляющих клиентам комплексные решения для косметических продуктов
+              {t('solutions.subtitle')}
             </p>
           </div>
           
@@ -161,8 +192,8 @@ export default function Home() {
                   <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">OEM/ODM Комплексные услуги</h3>
-              <p className="text-gray-600 mb-6">От разработки формул до производства и поставки, предоставляем полные решения контрактного производства</p>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">{t('solutions.oem.title')}</h3>
+              <p className="text-gray-600 mb-6">{t('solutions.oem.description')}</p>
       
             </div>
 
@@ -173,8 +204,8 @@ export default function Home() {
                   <path d="M9.049 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Восстановление после эстетической медицины</h3>
-              <p className="text-gray-600 mb-6">Профессиональные восстанавливающие продукты медицинского уровня, клинически проверенные на безопасность и эффективность</p>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">{t('solutions.medical.title')}</h3>
+              <p className="text-gray-600 mb-6">{t('solutions.medical.description')}</p>
               
             </div>
 
@@ -185,8 +216,8 @@ export default function Home() {
                   <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Платформа лиофилизационных технологий</h3>
-              <p className="text-gray-600 mb-6">Различные лиофилизированные формы, сохраняющие стабильность и эффективность активных компонентов</p>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">{t('solutions.freeze.title')}</h3>
+              <p className="text-gray-600 mb-6">{t('solutions.freeze.description')}</p>
               
             </div>
 
@@ -197,8 +228,8 @@ export default function Home() {
                   <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Функциональный уход за кожей</h3>
-              <p className="text-gray-600 mb-6">Глубокая специализация в различных направлениях эффективности: отбеливание, антивозрастной уход, предотвращение выпадения волос, восстановление и другие</p>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">{t('solutions.functional.title')}</h3>
+              <p className="text-gray-600 mb-6">{t('solutions.functional.description')}</p>
               
             </div>
           </div>
@@ -209,15 +240,15 @@ export default function Home() {
       <section id="research" className="py-16 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16 scroll-reveal">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Исследовательский потенциал</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{t('research.title')}</h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Глубокое сотрудничество с известными университетами, создание мощной системы исследований и разработок и технологической платформы
+              {t('research.subtitle')}
             </p>
           </div>
 
           {/* 联合实验室 */}
           <div className="mb-12 sm:mb-16">
-            <h3 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-8 sm:mb-12 scroll-reveal">Совместные лаборатории</h3>
+            <h3 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-8 sm:mb-12 scroll-reveal">{t('research.labs.title')}</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
               <div className="group text-center p-6 sm:p-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl sm:rounded-2xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 scroll-reveal stagger-1">
                 <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -225,8 +256,8 @@ export default function Home() {
                     <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
                   </svg>
                 </div>
-                <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Южный медицинский университет</h4>
-                <p className="text-sm sm:text-base text-gray-600">Фокус на трансдермальных технологиях, наноинкапсуляции, разработке натуральных ингредиентов; 56 патентов, партнеры включают China Resources 999, Danzi, Bawang, HBN и другие.</p>
+                <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{t('research.labs.southern.name')}</h4>
+                <p className="text-sm sm:text-base text-gray-600">{t('research.labs.southern.description')}</p>
               </div>
 
               <div className="group text-center p-6 sm:p-8 bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl sm:rounded-2xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
@@ -235,8 +266,8 @@ export default function Home() {
                     <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
                   </svg>
                 </div>
-                <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Аньхойский медицинский университет</h4>
-                <p className="text-sm sm:text-base text-gray-600">Совместная ключевая лаборатория, разработка высокоактивных, высокостабильных биологически активных компонентов (таких как рекомбинантный коллаген III типа, металлотионеин), замещающих традиционные экстракты животного происхождения.</p>
+                <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{t('research.labs.anhui.name')}</h4>
+                <p className="text-sm sm:text-base text-gray-600">{t('research.labs.anhui.description')}</p>
               </div>
 
               <div className="group text-center p-6 sm:p-8 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl sm:rounded-2xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
@@ -245,50 +276,50 @@ export default function Home() {
                     <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
                   </svg>
                 </div>
-                <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Команда экспертов Сянъя</h4>
-                <p className="text-sm sm:text-base text-gray-600">С 2022 года совместные исследования, фокус на высококачественном развитии индустрии медицинской эстетики, предоставление индивидуальных решений для ухода за кожей с акцентом на клинические испытания и развитие отрасли.</p>
+                <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{t('research.labs.sanya.name')}</h4>
+                <p className="text-sm sm:text-base text-gray-600">{t('research.labs.sanya.description')}</p>
               </div>
             </div>
           </div>
 
           {/* 技术平台 */}
           <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 shadow-lg">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Основные технологические платформы</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">{t('research.platforms.title')}</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-blue-800 font-bold">Л</span>
+                  <span className="text-blue-800 font-bold">{t('research.platforms.freeze.icon')}</span>
                 </div>
-                <h4 className="font-medium text-gray-900 mb-2">Лиофильная стабильность</h4>
-                <p className="text-gray-600 text-xs">Технология сохранения активности</p>
+                <h4 className="font-medium text-gray-900 mb-2">{t('research.platforms.freeze.name')}</h4>
+                <p className="text-gray-600 text-xs">{t('research.platforms.freeze.description')}</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-teal-600 font-bold">Н</span>
+                  <span className="text-teal-600 font-bold">{t('research.platforms.nano.icon')}</span>
                 </div>
-                <h4 className="font-medium text-gray-900 mb-2">Нано-носители</h4>
-                <p className="text-gray-600 text-xs">Технология микросферной инкапсуляции</p>
+                <h4 className="font-medium text-gray-900 mb-2">{t('research.platforms.nano.name')}</h4>
+                <p className="text-gray-600 text-xs">{t('research.platforms.nano.description')}</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-blue-800 font-bold">Б</span>
+                  <span className="text-blue-800 font-bold">{t('research.platforms.bio.icon')}</span>
                 </div>
-                <h4 className="font-medium text-gray-900 mb-2">Биомиметическая защита</h4>
-                <p className="text-gray-600 text-xs">Физико-химическая композиция</p>
+                <h4 className="font-medium text-gray-900 mb-2">{t('research.platforms.bio.name')}</h4>
+                <p className="text-gray-600 text-xs">{t('research.platforms.bio.description')}</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-teal-600 font-bold">М</span>
+                  <span className="text-teal-600 font-bold">{t('research.platforms.micro.icon')}</span>
                 </div>
-                <h4 className="font-medium text-gray-900 mb-2">Микроэмульсификация</h4>
-                <p className="text-gray-600 text-xs">Технология ультратонкой дисперсии</p>
+                <h4 className="font-medium text-gray-900 mb-2">{t('research.platforms.micro.name')}</h4>
+                <p className="text-gray-600 text-xs">{t('research.platforms.micro.description')}</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-blue-800 font-bold">Т</span>
+                  <span className="text-blue-800 font-bold">{t('research.platforms.trans.icon')}</span>
                 </div>
-                <h4 className="font-medium text-gray-900 mb-2">Трансдермальная абсорбция</h4>
-                <p className="text-gray-600 text-xs">Технология проникновения носителей</p>
+                <h4 className="font-medium text-gray-900 mb-2">{t('research.platforms.trans.name')}</h4>
+                <p className="text-gray-600 text-xs">{t('research.platforms.trans.description')}</p>
               </div>
             </div>
           </div>
@@ -299,9 +330,9 @@ export default function Home() {
       <section id="production" className="py-20 bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Производственные мощности</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('production.title')}</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Цеха класса 100,000 GMPC, полностью автоматизированные производственные линии, обеспечивающие качество продукции и возможности поставки
+              {t('production.subtitle')}
             </p>
           </div>
 
@@ -309,19 +340,19 @@ export default function Home() {
             {/* 生产能力 */}
             <div>
               <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Производственные возможности</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('production.capacity.title')}</h3>
                 <div className="space-y-6">
                   <div className="flex items-center justify-between p-4 bg-blue-50 rounded-xl">
-                    <span className="font-medium text-gray-900">Дневная производительность</span>
-                    <span className="text-2xl font-bold text-blue-800">1 млн+</span>
+                    <span className="font-medium text-gray-900">{t('production.capacity.daily')}</span>
+                    <span className="text-2xl font-bold text-blue-800">{t('production.capacity.dailyNumber')}</span>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-teal-50 rounded-xl">
-                    <span className="font-medium text-gray-900">Количество линий</span>
-                    <span className="text-2xl font-bold text-teal-600">50+ линий</span>
+                    <span className="font-medium text-gray-900">{t('production.capacity.lines')}</span>
+                    <span className="text-2xl font-bold text-teal-600">{t('production.capacity.linesNumber')}</span>
                   </div>
                   <div className="flex items-center justify-between p-4 bg-blue-50 rounded-xl">
-                    <span className="font-medium text-gray-900">Процессы контроля качества</span>
-                    <span className="text-2xl font-bold text-blue-800">36 этапов</span>
+                    <span className="font-medium text-gray-900">{t('production.capacity.quality')}</span>
+                    <span className="text-2xl font-bold text-blue-800">{t('production.capacity.qualityNumber')}</span>
                   </div>
                 </div>
               </div>
@@ -330,27 +361,27 @@ export default function Home() {
             {/* 认证资质 */}
             <div>
               <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Сертификации и квалификации</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('production.certifications.title')}</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-white rounded-xl border border-gray-100">
                     <div className="text-3xl mb-2">🏭</div>
                     <h4 className="font-semibold text-gray-900 mb-1">GMPC</h4>
-                    <p className="text-gray-600 text-sm">Чистые помещения класса 100,000</p>
+                    <p className="text-gray-600 text-sm">{t('production.certifications.gmpc')}</p>
                   </div>
                   <div className="text-center p-4 bg-gradient-to-br from-teal-50 to-white rounded-xl border border-gray-100">
                     <div className="text-3xl mb-2">🔬</div>
                     <h4 className="font-semibold text-gray-900 mb-1">ISO</h4>
-                    <p className="text-gray-600 text-sm">Система менеджмента качества</p>
+                    <p className="text-gray-600 text-sm">{t('production.certifications.iso')}</p>
                   </div>
                   <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-white rounded-xl border border-gray-100">
                     <div className="text-3xl mb-2">🌍</div>
                     <h4 className="font-semibold text-gray-900 mb-1">FDA</h4>
-                    <p className="text-gray-600 text-sm">Сертификация FDA США</p>
+                    <p className="text-gray-600 text-sm">{t('production.certifications.fda')}</p>
                   </div>
                   <div className="text-center p-4 bg-gradient-to-br from-teal-50 to-white rounded-xl border border-gray-100">
                     <div className="text-3xl mb-2">⚡</div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Автоматизация</h4>
-                    <p className="text-gray-600 text-sm">Интеллектуальная производственная система</p>
+                    <h4 className="font-semibold text-gray-900 mb-1">{t('production.certifications.automation')}</h4>
+                    <p className="text-gray-600 text-sm">{t('production.certifications.automationDesc')}</p>
                   </div>
                 </div>
               </div>
@@ -363,9 +394,9 @@ export default function Home() {
       <section id="materials" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Сырьевые базы</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('materials.title')}</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Три основные сырьевые базы, обеспечивающие качество и эффективность продукции от источника
+              {t('materials.subtitle')}
             </p>
           </div>
 
@@ -373,19 +404,19 @@ export default function Home() {
             {/* 不二莓茶 */}
             <div className="bg-gradient-to-br from-green-50 to-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
               <div className="text-4xl mb-4">🍃</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Чай Буэр</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">{t('materials.buer.name')}</h3>
               <div className="space-y-3 mb-6">
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-700 w-16">Место:</span>
-                  <span className="text-gray-600">Чжанцзяцзе, Хунань</span>
+                  <span className="font-medium text-gray-700 w-16">{t('materials.location')}:</span>
+                  <span className="text-gray-600">{t('materials.buer.location')}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-700 w-16">Состав:</span>
-                  <span className="text-gray-600">Дигидромирицетин</span>
+                  <span className="font-medium text-gray-700 w-16">{t('materials.component')}:</span>
+                  <span className="text-gray-600">{t('materials.buer.component')}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-700 w-16">Эффект:</span>
-                  <span className="text-gray-600">Антиоксидант, отбеливание</span>
+                  <span className="font-medium text-gray-700 w-16">{t('materials.effect')}:</span>
+                  <span className="text-gray-600">{t('materials.buer.effect')}</span>
                 </div>
               </div>
             </div>
@@ -393,19 +424,19 @@ export default function Home() {
             {/* 九节茶 */}
             <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
               <div className="text-4xl mb-4">🌿</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Чай Цзюцзе</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">{t('materials.jiujie.name')}</h3>
               <div className="space-y-3 mb-6">
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-700 w-16">Место:</span>
-                  <span className="text-gray-600">Дайшань, Гуанси</span>
+                  <span className="font-medium text-gray-700 w-16">{t('materials.location')}:</span>
+                  <span className="text-gray-600">{t('materials.jiujie.location')}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-700 w-16">Состав:</span>
-                  <span className="text-gray-600">Полифенольные соединения</span>
+                  <span className="font-medium text-gray-700 w-16">{t('materials.component')}:</span>
+                  <span className="text-gray-600">{t('materials.jiujie.component')}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-700 w-16">Эффект:</span>
-                  <span className="text-gray-600">Противовоспалительный, восстанавливающий</span>
+                  <span className="font-medium text-gray-700 w-16">{t('materials.effect')}:</span>
+                  <span className="text-gray-600">{t('materials.jiujie.effect')}</span>
                 </div>
               </div>
             </div>
@@ -413,19 +444,19 @@ export default function Home() {
             {/* 长白山人参 */}
             <div className="bg-gradient-to-br from-red-50 to-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
               <div className="text-4xl mb-4">🌱</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Женьшень Чанбайшань</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">{t('materials.ginseng.name')}</h3>
               <div className="space-y-3 mb-6">
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-700 w-16">Место:</span>
-                  <span className="text-gray-600">Чанбайшань, Цзилинь</span>
+                  <span className="font-medium text-gray-700 w-16">{t('materials.location')}:</span>
+                  <span className="text-gray-600">{t('materials.ginseng.location')}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-700 w-16">Состав:</span>
-                  <span className="text-gray-600">Гинзенозиды</span>
+                  <span className="font-medium text-gray-700 w-16">{t('materials.component')}:</span>
+                  <span className="text-gray-600">{t('materials.ginseng.component')}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-700 w-16">Эффект:</span>
-                  <span className="text-gray-600">Антивозрастной, подтягивающий</span>
+                  <span className="font-medium text-gray-700 w-16">{t('materials.effect')}:</span>
+                  <span className="text-gray-600">{t('materials.ginseng.effect')}</span>
                 </div>
               </div>
             </div>
@@ -437,59 +468,59 @@ export default function Home() {
       <section id="freeze-dry" className="py-20 bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Институт лиофилизации</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('freezeDry.title')}</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Профессиональная разработка технологий лиофилизации, различные лекарственные формы для удовлетворения потребностей разных продуктов
+              {t('freezeDry.subtitle')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* 冻干剂型 */}
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-8">Матрица лиофилизированных форм</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-8">{t('freezeDry.forms.title')}</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
                   <div className="text-2xl mb-2">❄️</div>
-                  <h4 className="font-medium text-gray-900">Лиофилизированный порошок</h4>
+                  <h4 className="font-medium text-gray-900">{t('freezeDry.forms.powder')}</h4>
                 </div>
                 <div className="text-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
                   <div className="text-2xl mb-2">🧊</div>
-                  <h4 className="font-medium text-gray-900">Лиофилизированные таблетки</h4>
+                  <h4 className="font-medium text-gray-900">{t('freezeDry.forms.tablets')}</h4>
                 </div>
                 <div className="text-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
                   <div className="text-2xl mb-2">🎭</div>
-                  <h4 className="font-medium text-gray-900">Лиофилизированная маска</h4>
+                  <h4 className="font-medium text-gray-900">{t('freezeDry.forms.mask')}</h4>
                 </div>
                 <div className="text-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
                   <div className="text-2xl mb-2">⚪</div>
-                  <h4 className="font-medium text-gray-900">Лиофилизированные шарики</h4>
+                  <h4 className="font-medium text-gray-900">{t('freezeDry.forms.beads')}</h4>
                 </div>
                 <div className="text-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
                   <div className="text-2xl mb-2">🔸</div>
-                  <h4 className="font-medium text-gray-900">Лиофилизированные гранулы</h4>
+                  <h4 className="font-medium text-gray-900">{t('freezeDry.forms.granules')}</h4>
                 </div>
                 <div className="text-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
                   <div className="text-2xl mb-2">🥛</div>
-                  <h4 className="font-medium text-gray-900">Лиофилизированное молочко</h4>
+                  <h4 className="font-medium text-gray-900">{t('freezeDry.forms.lotion')}</h4>
                 </div>
                 <div className="text-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
                   <div className="text-2xl mb-2">💧</div>
-                  <h4 className="font-medium text-gray-900">Лиофилизированная сыворотка</h4>
+                  <h4 className="font-medium text-gray-900">{t('freezeDry.forms.serum')}</h4>
                 </div>
               </div>
             </div>
 
             {/* 开发流程 */}
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-8">Процесс разработки</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-8">{t('freezeDry.process.title')}</h3>
               <div className="space-y-6">
                 <div className="flex items-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
                   <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
                     <span className="text-blue-800 font-bold">1</span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">Разработка рецептуры</h4>
-                    <p className="text-gray-600 text-sm">Дизайн и оптимизация формулы</p>
+                    <h4 className="font-semibold text-gray-900">{t('freezeDry.process.step1.title')}</h4>
+                    <p className="text-gray-600 text-sm">{t('freezeDry.process.step1.desc')}</p>
                   </div>
                 </div>
                 <div className="flex items-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
@@ -497,8 +528,8 @@ export default function Home() {
                     <span className="text-teal-600 font-bold">2</span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">Пилотное производство</h4>
-                    <p className="text-gray-600 text-sm">Проверка малосерийного производства</p>
+                    <h4 className="font-semibold text-gray-900">{t('freezeDry.process.step2.title')}</h4>
+                    <p className="text-gray-600 text-sm">{t('freezeDry.process.step2.desc')}</p>
                   </div>
                 </div>
                 <div className="flex items-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
@@ -506,8 +537,8 @@ export default function Home() {
                     <span className="text-blue-800 font-bold">3</span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">Валидация</h4>
-                    <p className="text-gray-600 text-sm">Тестирование стабильности и безопасности</p>
+                    <h4 className="font-semibold text-gray-900">{t('freezeDry.process.step3.title')}</h4>
+                    <p className="text-gray-600 text-sm">{t('freezeDry.process.step3.desc')}</p>
                   </div>
                 </div>
                 <div className="flex items-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
@@ -515,8 +546,8 @@ export default function Home() {
                     <span className="text-teal-600 font-bold">4</span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">Масштабирование</h4>
-                    <p className="text-gray-600 text-sm">Крупномасштабное производство и поставка</p>
+                    <h4 className="font-semibold text-gray-900">{t('freezeDry.process.step4.title')}</h4>
+                    <p className="text-gray-600 text-sm">{t('freezeDry.process.step4.desc')}</p>
                   </div>
                 </div>
               </div>
@@ -529,9 +560,9 @@ export default function Home() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Квалификации и награды</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('qualifications.title')}</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Авторитетные сертификаты и отраслевые награды, демонстрирующие силу предприятия и гарантию качества
+              {t('qualifications.subtitle')}
             </p>
           </div>
 
@@ -540,14 +571,14 @@ export default function Home() {
             <div className="relative h-64 bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
               <ImageModal 
                 src="/ppt/weitai10.png" 
-                alt="Сертификат квалификации предприятия" 
+                alt={t('qualifications.certificate')} 
                 className="w-full h-full"
               />
             </div>
             <div className="relative h-64 bg-gradient-to-br from-teal-50 to-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
               <ImageModal 
                 src="/ppt/weitai14.png" 
-                alt="Сертификат награды предприятия" 
+                alt={t('qualifications.certificate')} 
                 className="w-full h-full"
               />
             </div>
@@ -556,23 +587,23 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300">
               <div className="text-3xl mb-3">🏆</div>
-              <h4 className="font-semibold text-gray-900 text-sm">Высокотехнологичное предприятие</h4>
+              <h4 className="font-semibold text-gray-900 text-sm">{t('qualifications.highTech')}</h4>
             </div>
             <div className="text-center p-6 bg-gradient-to-br from-teal-50 to-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300">
               <div className="text-3xl mb-3">⭐</div>
-              <h4 className="font-semibold text-gray-900 text-sm">Специализированное и новое</h4>
+              <h4 className="font-semibold text-gray-900 text-sm">{t('qualifications.specialized')}</h4>
             </div>
             <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300">
               <div className="text-3xl mb-3">🏭</div>
-              <h4 className="font-semibold text-gray-900 text-sm">Сертификация GMPC</h4>
+              <h4 className="font-semibold text-gray-900 text-sm">{t('qualifications.gmpc')}</h4>
             </div>
             <div className="text-center p-6 bg-gradient-to-br from-teal-50 to-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300">
               <div className="text-3xl mb-3">🔬</div>
-              <h4 className="font-semibold text-gray-900 text-sm">Сертификация ISO</h4>
+              <h4 className="font-semibold text-gray-900 text-sm">{t('qualifications.iso')}</h4>
             </div>
             <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300">
               <div className="text-3xl mb-3">🌍</div>
-              <h4 className="font-semibold text-gray-900 text-sm">Сертификация FDA</h4>
+              <h4 className="font-semibold text-gray-900 text-sm">{t('qualifications.fda')}</h4>
             </div>
           </div>
         </div>
@@ -582,9 +613,9 @@ export default function Home() {
       <section id="news" className="py-20 bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Новостной центр</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('news.title')}</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Следите за отраслевой динамикой, делитесь научными достижениями и прогрессом сотрудничества
+              {t('news.subtitle')}
             </p>
           </div>
 
@@ -594,13 +625,13 @@ export default function Home() {
               <div className="h-48 bg-gradient-to-br from-blue-100 to-blue-200 relative">
                 <ImageModal 
                   src="/ppt/weitai07.png" 
-                  alt="Стратегическое сотрудничество Weitai Bio с Южным медицинским университетом" 
+                  alt={t('news.card1.alt')} 
                   className="w-full h-full"
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Weitai Bio подписала соглашение о стратегическом сотрудничестве с Южным медицинским университетом</h3>
-                <p className="text-gray-600 text-sm mb-4">Обе стороны будут проводить глубокое сотрудничество в области дерматологических исследований, проверки эффективности и других областях, совместно продвигая интегрированное развитие производства, обучения и исследований.</p>
+                <h3 className="text-lg font-bold text-gray-900 mb-3">{t('news.card1.title')}</h3>
+                <p className="text-gray-600 text-sm mb-4">{t('news.card1.description')}</p>
                 
               </div>
             </div>
@@ -610,13 +641,13 @@ export default function Home() {
               <div className="h-48 bg-gradient-to-br from-teal-100 to-teal-200 relative">
                 <ImageModal 
                   src="/ppt/weitai15.png" 
-                  alt="Новый цех класса 100,000 GMPC официально введен в эксплуатацию" 
+                  alt={t('news.card2.alt')} 
                   className="w-full h-full"
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Новый цех класса 100,000 GMPC официально введен в эксплуатацию</h3>
-                <p className="text-gray-600 text-sm mb-4">Новая автоматизированная производственная линия официально введена в эксплуатацию, суточная производительность увеличена до 1 миллиона+, что дополнительно повышает способность к поставкам.</p>
+                <h3 className="text-lg font-bold text-gray-900 mb-3">{t('news.card2.title')}</h3>
+                <p className="text-gray-600 text-sm mb-4">{t('news.card2.description')}</p>
                 
               </div>
             </div>
@@ -626,13 +657,13 @@ export default function Home() {
               <div className="h-48 bg-gradient-to-br from-green-100 to-green-200 relative">
                 <ImageModal 
                   src="/ppt/weitai08.png" 
-                  alt="Совместное строительство ключевой лаборатории синтетических биопротеинов с Аньхойским медицинским университетом" 
+                  alt={t('news.card3.alt')} 
                   className="w-full h-full"
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Совместное строительство ключевой лаборатории синтетических биопротеинов с Аньхойским медицинским университетом</h3>
-                <p className="text-gray-600 text-sm mb-4">Ключевая лаборатория синтетических биопротеинов провинции Аньхой: комбинация биологии + фармакологии + дерматологии, формирующая решения для проблемной кожи.</p>
+                <h3 className="text-lg font-bold text-gray-900 mb-3">{t('news.card3.title')}</h3>
+                <p className="text-gray-600 text-sm mb-4">{t('news.card3.description')}</p>
                 
               </div>
             </div>
@@ -647,17 +678,17 @@ export default function Home() {
             {/* 公司信息 */}
             <div className="md:col-span-2">
               <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent mb-4">
-                Weitai Bio
+                {t('footer.companyName')}
               </div>
               <p className="text-gray-300 mb-6 max-w-md">
-                Биотехнологическая компания, специализирующаяся на слиянии восточной эстетики и современных технологий, стремящаяся создать суперфабрику функциональной косметики.
+                {t('footer.description')}
               </p>
               <div className="space-y-3">
                 <div className="flex items-center">
                   <svg className="w-5 h-5 mr-3 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
                   </svg>
-                  <span className="text-gray-300">0079298331259</span>
+                  <span className="text-gray-300">{t('footer.phone')}</span>
                 </div>
                 {/* <div className="flex items-center">
                   <svg className="w-5 h-5 mr-3 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
@@ -671,10 +702,10 @@ export default function Home() {
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
                   </svg>
                   <div className="flex flex-col space-y-1">
-                    <span className="text-gray-300">Завод Weitai в Гуанчжоу: № 77, 15-я община деревни Далан, улица Байюньху, район Байюнь, Гуанчжоу</span>
-                    <span className="text-gray-300">Завод Weitai в Гуандуне: № 18, Восточная дорога Таоюань, промышленный парк Сунся, город Шишань, район Наньхай, Фошань</span>
-                    <span className="text-gray-300">Завод Weitai в Хунани: корпус 11, интеллектуальный промышленный парк Лань Юэ Гу, Северная дорога Сеюань, зона экономического развития Нинсян, Чанша</span>
-                    <span className="text-gray-300">Маркетинговый центр: комната 801, здание тестирования Байюнь Мейвань, № 408, дорога Гуанъюнь, район Байюнь, Гуанчжоу</span>
+                    <span className="text-gray-300">{t('footer.addresses.guangzhou')}</span>
+                    <span className="text-gray-300">{t('footer.addresses.guangdong')}</span>
+                    <span className="text-gray-300">{t('footer.addresses.hunan')}</span>
+                    <span className="text-gray-300">{t('footer.addresses.marketing')}</span>
                   </div>
                 </div>
               </div>
@@ -682,20 +713,20 @@ export default function Home() {
 
             {/* 快速链接 */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Быстрые ссылки</h3>
+              <h3 className="text-lg font-semibold mb-4">{t('footer.quickLinks.title')}</h3>
               <ul className="space-y-2">
-                <li><a href="#about" className="text-gray-300 hover:text-white transition-colors">О нас</a></li>
-                <li><a href="#research" className="text-gray-300 hover:text-white transition-colors">Исследования</a></li>
-                <li><a href="#production" className="text-gray-300 hover:text-white transition-colors">Производство</a></li>
-                <li><a href="#solutions" className="text-gray-300 hover:text-white transition-colors">Решения</a></li>
-                <li><a href="#news" className="text-gray-300 hover:text-white transition-colors">Новости</a></li>
-                <li><a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">Магазин</a></li>
+                <li><a href="#about" className="text-gray-300 hover:text-white transition-colors">{t('footer.quickLinks.about')}</a></li>
+                <li><a href="#research" className="text-gray-300 hover:text-white transition-colors">{t('footer.quickLinks.research')}</a></li>
+                <li><a href="#production" className="text-gray-300 hover:text-white transition-colors">{t('footer.quickLinks.production')}</a></li>
+                <li><a href="#solutions" className="text-gray-300 hover:text-white transition-colors">{t('footer.quickLinks.solutions')}</a></li>
+                <li><a href="#news" className="text-gray-300 hover:text-white transition-colors">{t('footer.quickLinks.news')}</a></li>
+                <li><a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">{t('footer.quickLinks.shop')}</a></li>
               </ul>
             </div>
 
             {/* 微信二维码 */}
             {/* <div>
-              <h3 className="text-lg font-semibold mb-4">Консультация WeChat</h3>
+              <h3 className="text-lg font-semibold mb-4">{t('contact.wechatConsultation')}</h3>
               <div className="w-32 h-32 bg-white rounded-lg flex items-center justify-center mb-4">
                 <Image
                   src="/ppt/weixin.png"
@@ -710,9 +741,9 @@ export default function Home() {
           </div>
 
           <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-            <p className="text-gray-400">Copyright © 2025 All Rights Reserved  Микропептид Групп
+            <p className="text-gray-400">{t('footer.copyright')}
               <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-                Регистрационный номер：Юэ ICP бэй 2023152128 хао
+                {t('footer.registration')}
               </a>
             </p>
           </div>
@@ -726,21 +757,21 @@ export default function Home() {
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
             </svg>
-            <span>Быстрый звонок</span>
+            <span>{t('contact.quickCall')}</span>
           </a>
           
           {/* <button className="flex-1 bg-gradient-to-r from-teal-600 to-teal-700 text-white py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center space-x-2 hover:from-teal-700 hover:to-teal-800 transition-all duration-300 shadow-lg">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd"/>
             </svg>
-            <span>Консультация WeChat</span>
+            <span>{t('contact.wechatConsultation')}</span>
           </button> */}
           
           <a href="https://www.weitaiclub.com" target="_blank" rel="noopener noreferrer" className="flex-1 border-2 border-gray-300 text-gray-700 py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center space-x-2 hover:border-gray-400 hover:bg-gray-50 transition-all duration-300">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 2L3 7v11a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V7l-7-5zM6 12a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1z" clipRule="evenodd"/>
             </svg>
-            <span>Магазин</span>
+            <span>{t('nav.shop')}</span>
           </a>
         </div>
       </div>
